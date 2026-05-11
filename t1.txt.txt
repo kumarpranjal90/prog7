@@ -1,7 +1,7 @@
  [local] 
   localhost ansible_connection=local 
 
-
+ ansible all  -i  inventory.ini  -m  ping
 
 ---
 - name: Install htop system monitor tool 
@@ -13,3 +13,5 @@
         ansible.builtin.package: 
             name: htop 
             state:  present
+
+ansible-playbook -i inventory.ini  install_htop.yml
