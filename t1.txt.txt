@@ -15,3 +15,20 @@
         state: present
 
 ansible-playbook -i inventory.ini  install_htop.yml
+
+
+
+---
+- name: Deploy JAR
+  hosts: local
+  become: false
+
+  tasks:
+    - name: Copy JAR file
+      copy:
+        src: /mnt/c/ProgramData/Jenkins/.jenkins/workspace/prog8/myapp/target/myapp-1.0-SNAPSHOT.jar
+        dest: /home/pranjal/ansible-lab/app.jar
+        mode: '0755'
+
+    - name: Run JAR file
+      shell: nohup java -jar /home/pranjal/ansible-lab/app.jar > app.log 2>&1 &
